@@ -1,6 +1,6 @@
 from flask import Blueprint, request
-from backend.routes import success_response, error_response
-from backend.services import task_service
+from routes import success_response, error_response
+from services import task_service
 
 tasks_bp = Blueprint("tasks", __name__)
 

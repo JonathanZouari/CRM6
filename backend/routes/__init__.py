@@ -10,10 +10,10 @@ def error_response(message, status=400):
 
 
 def register_blueprints(app):
-    from backend.routes.customers import customers_bp
-    from backend.routes.orders import orders_bp
-    from backend.routes.tasks import tasks_bp
-    from backend.routes.chat import chat_bp
+    from routes.customers import customers_bp
+    from routes.orders import orders_bp
+    from routes.tasks import tasks_bp
+    from routes.chat import chat_bp
 
     app.register_blueprint(customers_bp)
     app.register_blueprint(orders_bp)

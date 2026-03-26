@@ -1,7 +1,7 @@
 import json
 from openai import OpenAI
-from backend.config import Config
-from backend.db import query
+from config import Config
+from db import query
 
 INTENT_MAP = {
     "count_late": {

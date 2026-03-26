@@ -1,6 +1,6 @@
 from flask import Blueprint, request
-from backend.routes import success_response, error_response
-from backend.services import chat_service
+from routes import success_response, error_response
+from services import chat_service
 
 chat_bp = Blueprint("chat", __name__)
 

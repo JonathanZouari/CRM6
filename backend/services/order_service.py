@@ -1,4 +1,4 @@
-from backend.db import query, query_one, execute
+from db import query, query_one, execute
 
 
 def get_orders_by_customer(customer_id):

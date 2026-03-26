@@ -1,8 +1,8 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from backend.config import Config
-from backend.db import init_pool
-from backend.routes import register_blueprints
+from config import Config
+from db import init_pool
+from routes import register_blueprints
 
 
 def create_app():

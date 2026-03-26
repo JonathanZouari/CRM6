@@ -1,6 +1,6 @@
 from flask import Blueprint, request
-from backend.routes import success_response, error_response
-from backend.services import order_service
+from routes import success_response, error_response
+from services import order_service
 
 orders_bp = Blueprint("orders", __name__)
 
