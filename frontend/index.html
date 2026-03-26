@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightCRM — Customers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand"><span>&#9992;</span> FlightCRM</div>
+        <div class="navbar-links">
+            <a href="index.html" class="active">Customers</a>
+            <a href="chat.html">Chat</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="stats-row" id="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Total Customers</div>
+                <div class="stat-value" id="stat-total">-</div>
+            </div>
+            <div class="stat-card danger">
+                <div class="stat-label">Late Follow-ups</div>
+                <div class="stat-value" id="stat-late">-</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-label">In Progress</div>
+                <div class="stat-value" id="stat-progress">-</div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-label">Closed</div>
+                <div class="stat-value" id="stat-closed">-</div>
+            </div>
+        </div>
+
+        <div class="page-header">
+            <h1 class="page-title">Customers</h1>
+            <button class="btn btn-primary" onclick="openAddModal()">+ Add Customer</button>
+        </div>
+
+        <div class="filter-bar">
+            <select id="status-filter" onchange="loadCustomers()">
+                <option value="">All Statuses</option>
+                <option value="new">New</option>
+                <option value="in_progress">In Progress</option>
+                <option value="closed">Closed</option>
+            </select>
+            <input type="text" id="search-input" placeholder="Search by name..." oninput="filterTable()">
+        </div>
+
+        <div class="card">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Last Contact</th>
+                            <th>Follow-up</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customers-table"></tbody>
+                </table>
+            </div>
+            <div class="empty-state hidden" id="empty-state">No customers found.</div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Customer Modal -->
+    <div class="modal-overlay" id="customer-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span id="modal-title">Add Customer</span>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" id="form-name" placeholder="Customer name">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="form-phone" placeholder="Phone number">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="form-status">
+                            <option value="new">New</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Follow-up Date</label>
+                        <input type="datetime-local" id="form-followup">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveCustomer()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/customers.js"></script>
+</body>
+</html>

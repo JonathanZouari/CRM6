@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightCRM — Customer Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand"><span>&#9992;</span> FlightCRM</div>
+        <div class="navbar-links">
+            <a href="index.html">Customers</a>
+            <a href="chat.html">Chat</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Back to Customers</a>
+
+        <!-- Customer Info Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <span id="customer-name">Customer Details</span>
+                <button class="btn btn-primary btn-sm" onclick="openEditCustomer()">Edit</button>
+            </div>
+            <div class="card-body">
+                <div class="customer-info" id="customer-info">
+                    <div class="info-item">
+                        <span class="info-label">Phone</span>
+                        <span class="info-value" id="info-phone">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Status</span>
+                        <span class="info-value" id="info-status"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Created</span>
+                        <span class="info-value" id="info-created">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Last Contact</span>
+                        <span class="info-value" id="info-contact">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Follow-up</span>
+                        <span class="info-value" id="info-followup">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="two-columns">
+            <!-- Orders Section -->
+            <div class="card">
+                <div class="card-header">
+                    <span>Orders</span>
+                    <button class="btn btn-primary btn-sm" onclick="openOrderModal()">+ Add Order</button>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Departure</th>
+                                <th>Return</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table"></tbody>
+                    </table>
+                </div>
+                <div class="empty-state hidden" id="orders-empty">No orders yet.</div>
+            </div>
+
+            <!-- Tasks Section -->
+            <div class="card">
+                <div class="card-header">
+                    <span>Tasks</span>
+                    <button class="btn btn-primary btn-sm" onclick="openTaskModal()">+ Add Task</button>
+                </div>
+                <div class="card-body" id="tasks-list">
+                    <div class="empty-state hidden" id="tasks-empty">No tasks yet.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Customer Modal -->
+    <div class="modal-overlay" id="edit-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span>Edit Customer</span>
+                <button class="close-btn" onclick="closeAllModals()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" id="edit-name">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="edit-phone">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="edit-status">
+                            <option value="new">New</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Follow-up Date</label>
+                        <input type="datetime-local" id="edit-followup">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeAllModals()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEditCustomer()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Order Modal -->
+    <div class="modal-overlay" id="order-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span>Add Order</span>
+                <button class="close-btn" onclick="closeAllModals()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Destination *</label>
+                    <input type="text" id="order-destination" placeholder="e.g., Paris, Tokyo">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Departure Date *</label>
+                        <input type="date" id="order-departure">
+                    </div>
+                    <div class="form-group">
+                        <label>Return Date</label>
+                        <input type="date" id="order-return">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Price *</label>
+                        <input type="number" id="order-price" step="0.01" min="0" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="order-status">
+                            <option value="offer">Offer</option>
+                            <option value="paid">Paid</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeAllModals()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveOrder()">Save Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div class="modal-overlay" id="task-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span>Add Task</span>
+                <button class="close-btn" onclick="closeAllModals()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title *</label>
+                    <input type="text" id="task-title" placeholder="Task description">
+                </div>
+                <div class="form-group">
+                    <label>Due Date *</label>
+                    <input type="date" id="task-due">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeAllModals()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveTask()">Save Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/customer.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightCRM — Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand"><span>&#9992;</span> FlightCRM</div>
+        <div class="navbar-links">
+            <a href="index.html">Customers</a>
+            <a href="chat.html" class="active">Chat</a>
+        </div>
+    </nav>
+
+    <div class="chat-container">
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-bubble assistant">
+                Hi! I'm your CRM assistant. Ask me about customers, orders, revenue, or tasks.
+            </div>
+        </div>
+
+        <div class="chat-suggestions" id="suggestions">
+            <button class="suggestion-chip" onclick="sendSuggestion(this)">How many customers are late?</button>
+            <button class="suggestion-chip" onclick="sendSuggestion(this)">Total revenue this month?</button>
+            <button class="suggestion-chip" onclick="sendSuggestion(this)">Upcoming departures?</button>
+            <button class="suggestion-chip" onclick="sendSuggestion(this)">Open tasks?</button>
+            <button class="suggestion-chip" onclick="sendSuggestion(this)">Order statistics?</button>
+        </div>
+
+        <div class="chat-input-bar">
+            <input type="text" id="chat-input" placeholder="Ask a question..."
+                   onkeydown="if(event.key==='Enter') sendMessage()">
+            <button onclick="sendMessage()">&#10148;</button>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>
