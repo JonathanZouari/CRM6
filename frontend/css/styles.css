@@ -60,6 +60,23 @@ a:hover {
     z-index: 100;
 }
 
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), #6366f1, var(--color-primary));
+    background-size: 200% 100%;
+    animation: gradient-slide 6s ease infinite;
+}
+
+@keyframes gradient-slide {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
 .navbar-brand {
     font-size: 20px;
     font-weight: 700;
@@ -137,6 +154,12 @@ a:hover {
     padding: 16px 20px;
     box-shadow: var(--shadow);
     border-left: 4px solid var(--color-primary);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .stat-card.danger {
@@ -672,9 +695,98 @@ tbody tr.clickable {
 /* ===== Empty State ===== */
 .empty-state {
     text-align: center;
-    padding: 40px;
+    padding: 48px 40px;
     color: var(--color-text-muted);
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.empty-state-illustration {
+    width: 180px;
+    height: 140px;
+    opacity: 0.85;
+}
+
+.empty-state-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.empty-state-text {
     font-size: 14px;
+    color: var(--color-text-muted);
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+/* ===== Hero Section ===== */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--color-primary-light), #ede9fe);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 200px;
+}
+
+.hero-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 6px;
+}
+
+.hero-subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.hero-illustration {
+    flex-shrink: 0;
+    width: 260px;
+    height: 130px;
+}
+
+.hero-illustration svg {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+/* ===== Chat Welcome Illustration ===== */
+.chat-welcome-illustration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 0;
+}
+
+.chat-welcome-illustration svg {
+    width: 120px;
+    height: 120px;
+}
+
+/* ===== Card hover effects ===== */
+.card {
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
 }
 
 /* ===== Utilities ===== */
@@ -698,5 +810,14 @@ tbody tr.clickable {
     }
     .chat-bubble {
         max-width: 85%;
+    }
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    .hero-illustration {
+        width: 200px;
+        height: 100px;
     }
 }
