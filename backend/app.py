@@ -6,6 +6,7 @@ from backend.routes import register_blueprints
 
 
 def create_app():
+    Config.reload()
     Config.validate()
 
     app = Flask(__name__)
